@@ -14,7 +14,8 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-import {bootstrap} from "aurelia-bootstrapper-webpack";
+import {PLATFORM} from "aurelia-pal";
+import {bootstrap} from "aurelia-bootstrapper";
 import "styles/openmotics.css";
 import "font-awesome/css/font-awesome.css";
 import "bootstrap/dist/css/bootstrap.css";
@@ -23,7 +24,6 @@ import "admin-lte/dist/css/skins/skin-green.css";
 import "bootstrap";
 import * as Bluebird from "bluebird";
 import Backend from "i18next-xhr-backend";
-import {ViewLocator} from "aurelia-framework";
 import {AdminLTE} from "admin-lte";
 import {API} from "./components/api";
 
@@ -31,7 +31,7 @@ Bluebird.config({warnings: false});
 
 function loadLocales(url, options, callback, data) {
     try {
-        let waitForLocale = require('bundle!locale/' + url + '.json');
+        let waitForLocale = require('file-loader!locale/' + url + '.json');
         waitForLocale((locale) => {
             callback(locale, {status: '200'});
         });
@@ -59,17 +59,17 @@ async function boot(aurelia) {
         .standardConfiguration()
         .developmentLogging()
         .globalResources([
-            'resources/translate',
-            'resources/let',
-            'resources/togglebutton/togglebutton',
-            'resources/schedule/schedule',
-            'resources/slider/slider',
-            'resources/blockly/blockly',
-            'resources/dropdown/dropdown',
-            'resources/globalthermostat/thermostat',
-            'resources/valueconverters'
+            PLATFORM.moduleName('resources/translate', 'resources'),
+            PLATFORM.moduleName('resources/let', 'resources'),
+            PLATFORM.moduleName('resources/togglebutton/togglebutton', 'resources'),
+            PLATFORM.moduleName('resources/schedule/schedule', 'resources'),
+            PLATFORM.moduleName('resources/slider/slider', 'resources'),
+            PLATFORM.moduleName('resources/blockly/blockly', 'blockly'),
+            PLATFORM.moduleName('resources/dropdown/dropdown', 'resources'),
+            PLATFORM.moduleName('resources/globalthermostat/thermostat', 'resources'),
+            PLATFORM.moduleName('resources/valueconverters', 'resources')
         ])
-        .plugin('aurelia-i18n', (instance) => {
+        .plugin(PLATFORM.moduleName('aurelia-i18n', 'aurelia'), (instance) => {
             instance.i18next.use(Backend);
             return instance.setup({
                 backend: {
@@ -84,9 +84,9 @@ async function boot(aurelia) {
                 ns: ['translation']
             });
         })
-        .plugin('aurelia-dialog')
-        .plugin('aurelia-computed')
-        .plugin('aurelia-google-analytics', (config) => {
+        .plugin(PLATFORM.moduleName('aurelia-dialog', 'aurelia'))
+        .plugin(PLATFORM.moduleName('aurelia-computed', 'aurelia'))
+        .plugin(PLATFORM.moduleName('aurelia-google-analytics', 'aurelia'), (config) => {
             config.init('UA-37903864-4');
             config.attach({
                 logging: {

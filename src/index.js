@@ -14,6 +14,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+import {PLATFORM} from "aurelia-pal";
 import {AdminLTE} from "admin-lte";
 import {inject} from "aurelia-framework";
 import {Router} from "aurelia-router";
@@ -61,19 +62,23 @@ export class Index extends Base {
                     route: '', redirect: Storage.getItem('last') || 'dashboard'
                 },
                 {
-                    route: 'dashboard', name: 'dashboard', moduleId: 'pages/dashboard', nav: true, auth: true, land: true,
+                    route: 'dashboard', name: 'dashboard', moduleId: PLATFORM.moduleName('pages/dashboard', 'main-pages'),
+                    nav: true, auth: true, land: true,
                     settings: {key: 'dashboard', title: this.i18n.tr('pages.dashboard.title')}
                 },
                 {
-                    route: 'outputs', name: 'outputs', moduleId: 'pages/outputs', nav: true, auth: true, land: true,
+                    route: 'outputs', name: 'outputs', moduleId: PLATFORM.moduleName('pages/outputs', 'main-pages'),
+                    nav: true, auth: true, land: true,
                     settings: {key: 'outputs', title: this.i18n.tr('pages.outputs.title')}
                 },
                 {
-                    route: 'thermostats', name: 'thermostats', moduleId: 'pages/thermostats', nav: true, auth: true, land: true,
+                    route: 'thermostats', name: 'thermostats', moduleId: PLATFORM.moduleName('pages/thermostats', 'main-pages'),
+                    nav: true, auth: true, land: true,
                     settings: {key: 'thermostats', title: this.i18n.tr('pages.thermostats.title')}
                 },
                 {
-                    route: 'energy', name: 'energy', moduleId: 'pages/energy', nav: true, auth: true, land: true,
+                    route: 'energy', name: 'energy', moduleId: PLATFORM.moduleName('pages/energy', 'main-pages'),
+                    nav: true, auth: true, land: true,
                     settings: {key: 'energy', title: this.i18n.tr('pages.energy.title')}
                 },
                 {
@@ -81,39 +86,48 @@ export class Index extends Base {
                     settings: {key: 'settings'}
                 },
                 {
-                    route: 'settings/initialisation', name: 'settings.initialisation', moduleId: 'pages/settings/initialisation', nav: true, auth: true, land: true,
+                    route: 'settings/initialisation', name: 'settings.initialisation', moduleId: PLATFORM.moduleName('pages/settings/initialisation', 'settings-pages'),
+                    nav: true, auth: true, land: true,
                     settings: {key: 'settings.initialisation', title: this.i18n.tr('pages.settings.initialisation.title'), parent: 'settings'}
                 },
                 {
-                    route: 'settings/outputs', name: 'settings.outputs', moduleId: 'pages/settings/outputs', nav: true, auth: true, land: true,
+                    route: 'settings/outputs', name: 'settings.outputs', moduleId: PLATFORM.moduleName('pages/settings/outputs', 'settings-pages'),
+                    nav: true, auth: true, land: true,
                     settings: {key: 'settings.outputs', title: this.i18n.tr('pages.settings.outputs.title'), parent: 'settings'}
                 },
                 {
-                    route: 'settings/inputs', name: 'settings.inputs', moduleId: 'pages/settings/inputs', nav: true, auth: true, land: true,
+                    route: 'settings/inputs', name: 'settings.inputs', moduleId: PLATFORM.moduleName('pages/settings/inputs', 'settings-pages'),
+                    nav: true, auth: true, land: true,
                     settings: {key: 'settings.inputs', title: this.i18n.tr('pages.settings.inputs.title'), parent: 'settings'}
                 },
                 {
-                    route: 'settings/sensors', name: 'settings.sensors', moduleId: 'pages/settings/sensors', nav: true, auth: true, land: true,
+                    route: 'settings/sensors', name: 'settings.sensors', moduleId: PLATFORM.moduleName('pages/settings/sensors', 'settings-pages'),
+                    nav: true, auth: true, land: true,
                     settings: {key: 'settings.sensors', title: this.i18n.tr('pages.settings.sensors.title'), parent: 'settings'}
                 },
                 {
-                    route: 'settings/thermostats', name: 'settings.thermostats', moduleId: 'pages/settings/thermostats', nav: true, auth: true, land: true,
+                    route: 'settings/thermostats', name: 'settings.thermostats', moduleId: PLATFORM.moduleName('pages/settings/thermostats', 'settings-pages'),
+                    nav: true, auth: true, land: true,
                     settings: {key: 'settings.thermostats', title: this.i18n.tr('pages.settings.thermostats.title'), parent: 'settings'}
                 },
                 {
-                    route: 'settings/groupactions', name: 'settings.groupactions', moduleId: 'pages/settings/groupactions', nav: true, auth: true, land: true,
+                    route: 'settings/groupactions', name: 'settings.groupactions', moduleId: PLATFORM.moduleName('pages/settings/groupactions', 'settings-pages'),
+                    nav: true, auth: true, land: true,
                     settings: {key: 'settings.groupactions', title: this.i18n.tr('pages.settings.groupactoins.title'), parent: 'settings'}
                 },
                 {
-                    route: 'settings/environment', name: 'settings.environment', moduleId: 'pages/settings/environment', nav: true, auth: true, land: true,
+                    route: 'settings/environment', name: 'settings.environment', moduleId: PLATFORM.moduleName('pages/settings/environment', 'settings-pages'),
+                    nav: true, auth: true, land: true,
                     settings: {key: 'settings.environment', title: this.i18n.tr('pages.settings.environment.title'), parent: 'settings'}
                 },
                 {
-                    route: 'settings/plugins', name: 'settings.plugins', moduleId: 'pages/settings/plugins', nav: true, auth: true, land: true,
+                    route: 'settings/plugins', name: 'settings.plugins', moduleId: PLATFORM.moduleName('pages/settings/plugins', 'settings-pages'),
+                    nav: true, auth: true, land: true,
                     settings: {key: 'settings.plugins', title: this.i18n.tr('pages.settings.plugins.title'), parent: 'settings'}
                 },
                 {
-                    route: 'logout', name: 'logout', moduleId: 'pages/logout', nav: false, auth: false, land: false,
+                    route: 'logout', name: 'logout', moduleId: PLATFORM.moduleName('pages/logout', 'main-pages'),
+                    nav: false, auth: false, land: false,
                     settings: {}
                 }
             ]);

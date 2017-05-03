@@ -14,6 +14,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+import {PLATFORM} from "aurelia-pal";
 import {AdminLTE} from "admin-lte";
 import {inject} from "aurelia-framework";
 import {Router} from "aurelia-router";
@@ -36,11 +37,11 @@ export class Users extends Base {
                     route: '', redirect: 'login'
                 },
                 {
-                    route: 'login', name: 'login', moduleId: 'usermanagement/login', nav: false,
+                    route: 'login', name: 'login', moduleId: PLATFORM.moduleName('usermanagement/login', 'user-pages'), nav: false,
                     settings: {key: 'login', title: this.i18n.tr('pages.login.title')}
                 },
                 {
-                    route: 'create', name: 'create', moduleId: 'usermanagement/create', nav: false,
+                    route: 'create', name: 'create', moduleId: PLATFORM.moduleName('usermanagement/create', 'user-pages'), nav: false,
                     settings: {key: 'create', title: this.i18n.tr('pages.create.title')}
                 }
             ]);

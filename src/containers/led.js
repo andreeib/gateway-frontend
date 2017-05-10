@@ -37,7 +37,7 @@ export class Led {
             this.mode = undefined;
         } else {
             let parts = enumerator.split(' B');
-            for (var [key, value] of modes) {
+            for (let [key, value] of modes) {
                 if (value === parts[0]) {
                     this.mode = key;
                 }

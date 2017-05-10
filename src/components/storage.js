@@ -36,6 +36,16 @@ export class Storage {
         return Storage.getItem(this.prefix + key);
     }
 
+    keys() {
+        let keys = [];
+        for (let key of Object.keys(localStorage)) {
+            if (key.startsWith(this.prefix)) {
+                keys.push(key.replace(this.prefix, ''));
+            }
+        }
+        return keys;
+    }
+
     static setItem(key, value) {
         localStorage.setItem(key, JSON.stringify(value));
     }

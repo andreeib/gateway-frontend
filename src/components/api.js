@@ -53,12 +53,18 @@ export class API {
                     cache: 'no-store'
                 });
         });
+
+        for (let key of this.cache.keys()) {
+            let entry = this.cache.get(key);
+            entry.expire = 0;
+            this.cache.set(key, entry);
+        }
     }
 
     // Helper methods
     _buildArguments(params, authenticate) {
-        var items = [];
-        for (var param in params) {
+        let items = [];
+        for (let param in params) {
             if (params.hasOwnProperty(param) && params[param] !== undefined) {
                 items.push(param + '=' + (params[param] === 'null' ? 'None' : params[param]));
             }
@@ -212,10 +218,11 @@ export class API {
                                     timestamp: now,
                                     stale: now + (options.cache.stale || 30000),
                                     expire: 0,
-                                    limit: options.cache.limit || 30000,
+                                    limit: options.cache.limit || 60000,
                                     data: result
                                 });
-                                if (result === undefined) {
+                                console.debug('Cache "' + key + '" is refreshed');
+                                if (data === undefined) {
                                     resolve(result);
                                 }
                             })

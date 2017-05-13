@@ -27,7 +27,8 @@ module.exports = {
                     plugins: ['transform-class-properties', 'transform-decorators-legacy']
                 }
             },
-            {test: /\.(css)$/i, use: ["style-loader", "css-loader"]},
+            {test: /\.css$/i, loader: 'css-loader', issuer: /\.html?$/i},
+            {test: /\.css$/i, loader: ['style-loader', 'css-loader'], issuer: /\.[tj]s$/i},
             {test: /\.(html)$/i, use: "html-loader"},
             {test: /\.(ttf|otf|eot|svg|woff(2)?)(\?[a-z0-9]+)?$/, loader: 'file-loader?name=fonts/[hash].[ext]'},
             {test: /\.(png|jpeg|jpg)$/, loader: 'file-loader?name=images/[hash].[ext]'},
@@ -46,11 +47,6 @@ module.exports = {
             jQuery: 'jquery',
             $: 'jquery',
             jquery: 'jquery'
-        }),
-        new ModuleDependenciesPlugin({ // https://github.com/aurelia/dialog/issues/254
-            "aurelia-framework": ['aurelia-dialog'],
-            "aurelia-dialog": ['./ai-dialog', './ai-dialog-header', './ai-dialog-body',
-                './ai-dialog-footer', './attach-focus']
         }),
         new AureliaPlugin(),
         new HtmlWebpackPlugin({

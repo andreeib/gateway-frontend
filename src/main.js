@@ -31,11 +31,13 @@ Bluebird.config({warnings: false});
 
 function loadLocales(url, options, callback, data) {
     try {
-        let waitForLocale = require('file-loader!locale/' + url + '.json');
+        let waitForLocale = require('locale/' + url + '.json');
         waitForLocale((locale) => {
+            alert(locale);
             callback(locale, {status: '200'});
         });
     } catch (e) {
+        console.error(e);
         callback(null, {status: '404'});
     }
 }
@@ -106,9 +108,9 @@ async function boot(aurelia) {
     let api = new API(undefined);
     return api.getVersion({ignoreMM: true, ignore401: true})
         .then(() => {
-            return aurelia.setRoot('index', document.body);
+            return aurelia.setRoot(PLATFORM.moduleName('index'), document.body);
         })
         .catch(() => {
-            return aurelia.setRoot('users', document.body);
+            return aurelia.setRoot(PLATFORM.moduleName('users'), document.body);
         });
 }
